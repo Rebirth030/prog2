@@ -1,10 +1,9 @@
 package de.hhn.prog2.lab02;
-
-
-import java.util.Arrays;
-
 public class Main {
-
+    /**
+     * Erstellt Personen und zum Testen der Ausgaben, auf richtigkeit.
+     * @param args
+     */
     public static void main(String[] args) {
         try {
             Person person = PersonService.createPerson("ksk", "hap", 13, new Hobby[]{Hobby.HANDBALL, Hobby.BASKETBALL, Hobby.FUSSBALL, Hobby.SCHWIMMEN,Hobby.MALEN,Hobby.SKATEN});
