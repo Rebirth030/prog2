@@ -1,5 +1,8 @@
 package de.hhn.prog2.lab03;
 
+/**
+ * Main-Klasse zum Ausführen der main-Methode
+ */
 public class Main {
     public static void main(String[] args) {
         // Sample Usage
@@ -26,7 +29,7 @@ public class Main {
         cart.addProduct(pineapple, 2);
 
         cart.totalPrice();
-        
+
         cart.removeProduct(banana);
 
         System.out.println(cart); // prints shopping cart content
