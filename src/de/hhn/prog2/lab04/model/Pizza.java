@@ -3,6 +3,9 @@ package de.hhn.prog2.lab04.model;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Stellt eine Pizza da
+ */
 public class Pizza {
     private int price;
     private PizzaSize size;
@@ -15,6 +18,12 @@ public class Pizza {
         price = calcPrice(size, pizzaToppings.size());
     }
 
+    /**
+     * Berechnet den Preis der Pizza
+     * @param size PizzaSize
+     * @param toppings Integer
+     * @return Preis in cent (Integer)
+     */
     private static int calcPrice(PizzaSize size, int toppings) {
         int sum;
         priceList = new HashMap<>();
