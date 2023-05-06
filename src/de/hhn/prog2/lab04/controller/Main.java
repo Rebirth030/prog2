@@ -61,7 +61,12 @@ public class Main {
         PizzaConfigPanel.getEndButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                int n = JOptionPane.showConfirmDialog(PizzaConfigPanel.getDoneButton().getTopLevelAncestor(), "Willst du wirklich beenden", "Confirm Leaving",
+                        JOptionPane.YES_NO_OPTION);
+
+                if (n == JOptionPane.YES_OPTION) {
+                    System.exit(0);
+                }
             }
         });
     }
@@ -73,7 +78,12 @@ public class Main {
         PizzaMenuBar.getBeenden().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                int n = JOptionPane.showConfirmDialog(PizzaConfigPanel.getDoneButton().getTopLevelAncestor(), "Willst du wirklich beenden", "Confirm Leaving",
+                        JOptionPane.YES_NO_OPTION);
+
+                if (n == JOptionPane.YES_OPTION) {
+                    System.exit(0);
+                }
             }
         });
 
