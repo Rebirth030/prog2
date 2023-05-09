@@ -24,4 +24,6 @@ public class Order {
     public void removePizza(Pizza pizza) {
         pizzas.remove(pizza);
     }
+
+    public long getId() {return orderId;}
 }

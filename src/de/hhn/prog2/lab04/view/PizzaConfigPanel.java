@@ -161,4 +161,12 @@ public class PizzaConfigPanel {
     public static PizzaSize getSize() {
         return pizzaSizes[comboBox.getSelectedIndex()];
     }
+
+    public static HashMap<PizzaTopping, String> getToppingNames() {
+        return toppingNames;
+    }
+
+    public static HashMap<PizzaSize, String> getToppingSizes() {
+        return toppingSizes;
+    }
 }
