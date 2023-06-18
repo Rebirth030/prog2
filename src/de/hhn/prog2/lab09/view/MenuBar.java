@@ -2,7 +2,7 @@ package de.hhn.prog2.lab09.view;
 
 import javax.swing.*;
 
-public class menuBar {
+public class MenuBar {
     private static JMenuItem beenden;
     /**
      * Erstellt eine JMenuBar und fügt diese zum JFrame hinzu.
@@ -11,7 +11,7 @@ public class menuBar {
     public static void addJMenuBar(JFrame frame){
 
         JMenuBar jMenuBar = new JMenuBar();
-        JMenu data = new JMenu(configPanel.getBundle().getString("Datei"));
+        JMenu data = new JMenu(ConfigPanel.getBundle().getString("Datei"));
 
         initData(data);
 
@@ -25,7 +25,7 @@ public class menuBar {
      * @param data JMenu
      */
     private static void initData(JMenu data) {
-        beenden = new JMenuItem(configPanel.getBundle().getString("Beenden"));
+        beenden = new JMenuItem(ConfigPanel.getBundle().getString("Beenden"));
         data.add(beenden);
     }
 

@@ -1,8 +1,9 @@
 package de.hhn.prog2.lab09.model;
 
 import java.time.LocalDate;
-import java.util.Locale;
-
+/**
+ * Stellt einen Kunden dar
+ */
 public class Customer {
     private String prename,lastname;
     private LocalDate dateOfBirth;

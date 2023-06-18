@@ -2,9 +2,9 @@ package de.hhn.prog2.lab09.controller;
 
 import de.hhn.prog2.lab09.io.DataManager;
 import de.hhn.prog2.lab09.model.Customer;
-import de.hhn.prog2.lab09.view.configPanel;
-import de.hhn.prog2.lab09.view.frame;
-import de.hhn.prog2.lab09.view.menuBar;
+import de.hhn.prog2.lab09.view.ConfigPanel;
+import de.hhn.prog2.lab09.view.Frame;
+import de.hhn.prog2.lab09.view.MenuBar;
 
 import javax.swing.*;
 import java.io.FileNotFoundException;
@@ -12,12 +12,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
-import java.util.Formatter;
 import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.Objects;
-
-import static java.time.format.DateTimeFormatter.*;
 
 
 /**
@@ -25,7 +22,7 @@ import static java.time.format.DateTimeFormatter.*;
  */
 public class Controller {
     public static void main(String[] args) {
-        frame.createGUI(Locale.of("de_DE"));
+        Frame.createGUI(Locale.of("de_DE"));
         setSaveAction();
         setLoadAction();
         setJMenuBarActions();
@@ -34,17 +31,18 @@ public class Controller {
 
     /**
      * Setzt den ActionListener vom Fertig Button
+     * Es scheint so, als wäre von der API her, LocalDate von deutschland mit england gleich, weil der formatter auf Locale = en dasselbe ausgibt wie bei Locale = de_DE
      */
 
     public static void setLoadAction() {
-        configPanel.getLoadButton().addActionListener(e -> {
+        ConfigPanel.getLoadButton().addActionListener(e -> {
             try {
                 Customer customer = DataManager.loadCustomer();
-                DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL);
-                formatter.withLocale(Locale.of("en"));
-                configPanel.getTextField().setText(customer.getPrename());
-                configPanel.getTextField1().setText(customer.getLastname());
-                configPanel.getDate().setText(formatter.format(LocalDate.of(2002,11,22)));
+                DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
+                formatter.withLocale(ConfigPanel.getLocale());
+                ConfigPanel.getTextField().setText(customer.getPrename());
+                ConfigPanel.getTextField1().setText(customer.getLastname());
+                ConfigPanel.getDate().setText(formatter.format(customer.getDateOfBirth()));
             } catch (FileNotFoundException ex) {
                 throw new RuntimeException(ex);
             }
@@ -55,14 +53,18 @@ public class Controller {
      * Setzt den ActionListener für die JMenuBar Items
      */
     public static void setSaveAction() {
-        configPanel.getSaveButton().addActionListener(e -> {
-            try {
-                Customer customer = new Customer(configPanel.getTextField().getText(), configPanel.getTextField1().getText(), LocalDate.parse(configPanel.getDate().getText()));
-                DataManager.saveCustomer(customer);
-                JOptionPane.showMessageDialog(configPanel.getSaveButton().getTopLevelAncestor(),configPanel.getBundle().getString("MessageBest"));
-            } catch (NoSuchElementException | DateTimeParseException k){
-                k.printStackTrace();
-                JOptionPane.showMessageDialog(configPanel.getSaveButton().getTopLevelAncestor(),configPanel.getBundle().getString("MessageDate"));
+        ConfigPanel.getSaveButton().addActionListener(e -> {
+            if (!(ConfigPanel.getTextField().getText().isEmpty()&&ConfigPanel.getTextField1().getText().isEmpty()&&ConfigPanel.getDate().getText().isEmpty())) {
+                try {
+                    DateTimeFormatter dt = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+                    Customer customer = new Customer(ConfigPanel.getTextField().getText(), ConfigPanel.getTextField1().getText(), LocalDate.parse(ConfigPanel.getDate().getText(), dt));
+                    DataManager.saveCustomer(customer);
+                    JOptionPane.showMessageDialog(ConfigPanel.getSaveButton().getTopLevelAncestor(), ConfigPanel.getBundle().getString("MessageBest"));
+                } catch (NoSuchElementException | DateTimeParseException k) {
+                    JOptionPane.showMessageDialog(ConfigPanel.getSaveButton().getTopLevelAncestor(), ConfigPanel.getBundle().getString("MessageDate"));
+                }
+            } else {
+                JOptionPane.showMessageDialog(ConfigPanel.getSaveButton().getTopLevelAncestor(), ConfigPanel.getBundle().getString("MessageEmpty"));
             }
         });
     }
@@ -71,15 +73,18 @@ public class Controller {
      * Methode zum Setzen von MenuItemFunktionen
      */
     private static void setJMenuBarActions() {
-        menuBar.getBeenden().addActionListener(e -> System.exit(0));
+        MenuBar.getBeenden().addActionListener(e -> System.exit(0));
     }
 
+    /**
+     * sorgt dafür, das beim Auswählen einer Sprache ein neues JFrame in der richtigen Sprache geöffnet wird
+     */
     private static void setLanguage() {
-        configPanel.getComboBox().addActionListener(e -> {
-            Locale locale = Locale.of(Objects.requireNonNull(configPanel.getComboBox().getSelectedItem()).toString());
-            frame.getjFrame().dispose();
-            frame.createGUI(locale);
-            configPanel.getComboBox().setSelectedItem(locale.toString());
+        ConfigPanel.getComboBox().addActionListener(e -> {
+            Locale locale = Locale.of(Objects.requireNonNull(ConfigPanel.getComboBox().getSelectedItem()).toString());
+            Frame.getjFrame().dispose();
+            Frame.createGUI(locale);
+            ConfigPanel.getComboBox().setSelectedItem(locale.toString());
             setSaveAction();
             setLoadAction();
             setJMenuBarActions();

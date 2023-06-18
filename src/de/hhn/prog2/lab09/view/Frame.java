@@ -3,7 +3,7 @@ package de.hhn.prog2.lab09.view;
 import javax.swing.*;
 import java.util.Locale;
 
-public class frame {
+public class Frame {
     private static JFrame jFrame;
 
     /**
@@ -15,9 +15,9 @@ public class frame {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
         jFrame.setResizable(true);
-        configPanel.createPanel(jFrame, locale);
-        menuBar.addJMenuBar(jFrame);
-        jFrame.setTitle(configPanel.getBundle().getString("Eingabe"));
+        ConfigPanel.createPanel(jFrame, locale);
+        MenuBar.addJMenuBar(jFrame);
+        jFrame.setTitle(ConfigPanel.getBundle().getString("Eingabe"));
         jFrame.setVisible(true);
     }
 

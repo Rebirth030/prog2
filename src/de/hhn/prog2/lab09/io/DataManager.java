@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class DataManager {
     private static final String FILE_PATH_CSV = "src/de/hhn/prog2/lab09/io/Customer.csv";
     /**
-     * Schreibt die Informationen eines Customers in eine CSV Datei.
+     * Schreibt die Informationen eines Kunden in eine CSV Datei.
      * @param customer Customer
      */
     public static void saveCustomer(Customer customer) {
@@ -36,7 +36,7 @@ public class DataManager {
     }
 
     /**
-     * liest die Informationen einer Order aus einer CSV Datei ein.
+     * liest die Informationen einen Kunden aus einer CSV Datei ein.
      *
      */
     public static Customer loadCustomer() throws FileNotFoundException {

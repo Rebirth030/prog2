@@ -2,9 +2,6 @@ package de.hhn.prog2.lab09.view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -12,24 +9,24 @@ import java.util.ResourceBundle;
 /**
  * Klasse zum Erstellen der JPanels
  */
-public class configPanel {
+public class ConfigPanel {
 
     private static JButton load, save;
     private static  JComboBox<String> comboBox;
     private static ResourceBundle bundle;
-    private static JTextField textField;
-    private static JTextField textField1;
-    private static JTextField date;
+    private static JTextField textField, textField1, date;
+    private static Locale locale;
+
 
     /**
-     * Erstellt die Haupt-JPanels und addet diese zum JFrame
-     *
+     * Erstellt die JPanels, Buttons und alles andere und addet diese zum JFrame
      * @param frame JFrame
      */
     public static void createPanel(JFrame frame,Locale locale) {
         Locale german = Locale.of("de", "DE");
         Locale english = Locale.of("en");
 
+        ConfigPanel.locale = locale;
         comboBox = new JComboBox<>(new String[]{german.toString(),english.toString()});
         comboBox.setSelectedItem(locale.toString());
 
@@ -101,5 +98,8 @@ public class configPanel {
 
     public static JTextField getDate() {
         return date;
+    }
+    public static Locale getLocale() {
+        return locale;
     }
 }
