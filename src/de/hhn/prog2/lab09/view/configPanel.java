@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 
@@ -14,10 +14,12 @@ import java.util.ResourceBundle;
  */
 public class configPanel {
 
-    private static JButton load;
-    private static JButton save;
+    private static JButton load, save;
     private static  JComboBox<String> comboBox;
     private static ResourceBundle bundle;
+    private static JTextField textField;
+    private static JTextField textField1;
+    private static JTextField date;
 
     /**
      * Erstellt die Haupt-JPanels und addet diese zum JFrame
@@ -33,12 +35,12 @@ public class configPanel {
 
         bundle = ResourceBundle.getBundle("MessageBundle", locale);
 
-        DateFormat Date_Format = new SimpleDateFormat("dd MMM yyyy");
+
         JPanel panel = new JPanel(new GridLayout(6, 2));
 
-        JTextField textField = new JTextField();
-        JTextField textField1 = new JTextField();
-        JFormattedTextField date = new JFormattedTextField(Date_Format);
+        textField = new JTextField();
+        textField1 = new JTextField();
+        date = new JTextField();
 
         JLabel label = new JLabel(bundle.getString("Kunde"));
         label.setFont(new Font(bundle.getString("Kunde"), Font.BOLD, 40));
@@ -73,11 +75,11 @@ public class configPanel {
 
     }
 
-    public static JButton getDoneButton() {
+    public static JButton getLoadButton() {
         return load;
     }
 
-    public static JButton getEndButton() {
+    public static JButton getSaveButton() {
         return save;
     }
 
@@ -87,5 +89,17 @@ public class configPanel {
 
     public static ResourceBundle getBundle() {
         return bundle;
+    }
+
+    public static JTextField getTextField() {
+        return textField;
+    }
+
+    public static JTextField getTextField1() {
+        return textField1;
+    }
+
+    public static JTextField getDate() {
+        return date;
     }
 }

@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 
 public class DataStorage {
-    private static final String FILE_PATH_CSV = "src/de/hhn/prog2/lab04/io/Bestellung.csv";
+    private static final String FILE_PATH_CSV = "src/de/hhn/prog2/lab04/io/Customer.csv";
     private static final String FILE_PATH_BIN = "src/de/hhn/prog2/lab04/io/Bestellung.bin";
     private static String STORAGE_FORMAT = "binary";
 
